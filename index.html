@@ -3,298 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INVICTUS Test Series - The Winning Edge</title>
+    <title>INVICTUS Test Series</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Deep Indigo & Amber -->
-    <!-- Application Structure Plan: The SPA is structured as a persuasive narrative. It starts with a hook (the problem of lost marks), validates the existing preparation path, introduces INVICTUS as the elite solution, details its unique features through interactive cards, visualizes its role using the pyramid concept, and ends with a clear call to action. This top-down, problem-solution flow is designed to be more intuitive and compelling for parents than a simple feature list. -->
-    <!-- Visualization & Content Choices:
-        - Lost Marks (Report Info) -> Inform/Hook -> Donut Chart (Viz) -> Animate on scroll (Interaction) -> Visually grounds the core problem. (Chart.js, NO SVG).
-        - Test Progression (Report Info) -> Organize -> HTML/CSS Timeline (Viz) -> Reassures parents about the value of existing tests. (NO SVG/Mermaid).
-        - Core ITS Features (Report Info) -> Inform/Compare -> Interactive HTML Cards (Viz) -> Click to reveal details (Interaction) -> Encourages exploration of USPs. (NO SVG/Mermaid).
-        - Two-Tiered System (Report Info) -> Organize/Compare -> HTML/CSS Pyramid (Viz) -> Animate layers on scroll (Interaction) -> Clearly shows where ITS fits in the ecosystem. (NO SVG/Mermaid).
-        - Feedback Loop (Report Info) -> Organize -> HTML/CSS Flow Diagram (Viz) -> Highlight on hover (Interaction) -> Explains the post-test value chain. (NO SVG/Mermaid).
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F5F5F5;
+            background-color: #0a0a0a;
+            color: #e5e5e5;
         }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 300px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 300px;
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://placehold.co/1200x800/000000/FFFFFF?text=Conquer+JEE');
+            background-size: cover;
+            background-position: center;
         }
-        .invictus-amber { color: #FFAB00; }
-        .invictus-indigo { color: #1A237E; }
-        .bg-invictus-indigo { background-color: #1A237E; }
-        .bg-invictus-amber { background-color: #FFAB00; }
-        .border-invictus-amber { border-color: #FFAB00; }
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        .gradient-text {
+            background: -webkit-linear-gradient(45deg, #FDBB2D, #22C1C3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .pyramid-layer {
-            clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
-            transition: all 0.5s ease-in-out;
-        }
-        .feature-card {
-            perspective: 1000px;
-        }
-        .feature-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        .feature-card.is-flipped .feature-card-inner {
-            transform: rotateY(180deg);
-        }
-        .feature-card-front, .feature-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+        .card {
+            background-color: rgba(23, 23, 23, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            text-align: center;
         }
-        .feature-card-back {
-            transform: rotateY(180deg);
-            background-color: #1A237E;
-            color: white;
+        .card-content {
+            flex-grow: 1;
+        }
+        .btn-premium {
+            background: linear-gradient(45deg, #FDBB2D, #f5af19);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(253, 187, 45, 0.2);
+        }
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(253, 187, 45, 0.4);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid #FDBB2D;
+            color: #FDBB2D;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(253, 187, 45, 0.1);
+            transform: translateY(-2px);
+        }
+        .pricing-tab {
+            cursor: pointer;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            background-color: rgba(30,30,30,0.5);
+            border: 1px solid transparent;
+        }
+        .pricing-tab.active {
+            background-color: rgba(253, 187, 45, 0.1);
+            color: #FDBB2D;
+            font-weight: 700;
+            border-color: #FDBB2D;
+        }
+        .pricing-card {
+            background-color: #111;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: #FDBB2D;
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body>
 
-    <header class="bg-invictus-indigo text-white py-8 px-4 text-center animate-on-scroll">
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-2">The Difference Between a Good Rank and a Great One.</h1>
-        <p class="text-lg text-amber-300">Introducing the Aakash <span class="invictus-amber font-bold">INVICTUS</span> Test Series</p>
-    </header>
-
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-        <section class="text-center mb-20 animate-on-scroll">
-            <h2 class="text-3xl font-bold mb-4">The Hidden Hurdle to a Top Rank</h2>
-            <p class="max-w-3xl mx-auto text-lg mb-8">Even the most prepared students face a common challenge: small, preventable errors under pressure. On average, a student can lose 20-25 crucial marks due to silly mistakes or time traps. The INVICTUS Test Series is designed to find and fix these gaps before the final exam.</p>
-            <div class="chart-container">
-                <canvas id="marksLostChart"></canvas>
+    <!-- Hero Section -->
+    <section class="hero-section min-h-screen flex items-center justify-center text-center p-4">
+        <div class="max-w-4xl">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider text-white">
+                INVICTUS Test Series
+            </h1>
+            <p class="text-lg md:text-2xl mt-4 font-semibold gradient-text">
+                This is not a test series. It's a rank-refining tool.
+            </p>
+            <p class="mt-6 max-w-2xl mx-auto text-gray-300 md:text-lg">
+                Crafted by rank-makers for future rankers. INVICTUS is the ultimate training ground to move from good to great, and conquer JEE Advanced with confidence.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                 <a href="#open-test" class="w-full sm:w-auto inline-block btn-secondary font-bold py-3 px-8 rounded-lg text-lg uppercase">
+                    Take The Free Test
+                </a>
+                <a href="#pricing" class="w-full sm:w-auto inline-block btn-premium text-gray-900 font-bold py-3 px-8 rounded-lg text-lg uppercase">
+                    View All Courses
+                </a>
             </div>
-            <p class="mt-4 text-sm text-gray-600">Visualizing the 20-25 marks that can separate a student from their dream college and branch.</p>
-        </section>
+        </div>
+    </section>
 
-        <section class="mb-20 animate-on-scroll">
-            <h2 class="text-3xl font-bold text-center mb-2">First, Your Child's Strong Foundation</h2>
-            <p class="text-lg text-center max-w-3xl mx-auto mb-12">Your trust in Aakash has built a robust foundation through a structured preparation ecosystem. This path builds knowledge and discipline, and it remains the bedrock of their success.</p>
-            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
-                <div class="p-4 bg-white rounded-lg shadow-md text-center">
-                    <div class="font-bold text-invictus-indigo">Classroom Learning</div>
-                    <div class="text-sm">The Bedrock</div>
-                </div>
-                <div class="text-2xl font-bold text-gray-300 hidden md:block">&rarr;</div>
-                <div class="text-2xl font-bold text-gray-300 block md:hidden">&darr;</div>
-                <div class="p-4 bg-white rounded-lg shadow-md text-center">
-                    <div class="font-bold text-invictus-indigo">Unit & Term Tests</div>
-                    <div class="text-sm">Building Knowledge</div>
-                </div>
-                <div class="text-2xl font-bold text-gray-300 hidden md:block">&rarr;</div>
-                 <div class="text-2xl font-bold text-gray-300 block md:hidden">&darr;</div>
-                <div class="p-4 bg-white rounded-lg shadow-md text-center">
-                    <div class="font-bold text-invictus-indigo">AIATS</div>
-                    <div class="text-sm">National Benchmarking</div>
-                </div>
+    <!-- USPs Section -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Why INVICTUS is <span class="gradient-text">Non-Negotiable</span></h2>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">If your test series doesn't challenge you, it's not pushing you enough. We expose weaknesses here, so you gain strength in the real exam.</p>
             </div>
-        </section>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                 <!-- USP Cards -->
+                <div class="card p-6 rounded-xl transform hover:scale-105 transition-transform duration-300"><div class="card-content"><h3 class="text-xl font-bold text-white mb-2">Built by Rank-Makers</h3><p class="text-gray-400">Every test is created by mentors who've consistently delivered top 500 AIRs. That’s why our questions feel tougher but teach deeper.</p></div></div>
+                <div class="card p-6 rounded-xl transform hover:scale-105 transition-transform duration-300"><div class="card-content"><h3 class="text-xl font-bold text-white mb-2">100% Original Questions</h3><p class="text-gray-400">Guaranteed unique questions in every single test. Absolutely no repetition and no duplicity for a genuine challenge every time.</p></div></div>
+                <div class="card p-6 rounded-xl transform hover:scale-105 transition-transform duration-300"><div class="card-content"><h3 class="text-xl font-bold text-white mb-2">National Benchmarking</h3><p class="text-gray-400">Compete with thousands of serious aspirants across India and know exactly where you stand with our comprehensive national-level analysis.</p></div></div>
+                <div class="card p-6 rounded-xl transform hover:scale-105 transition-transform duration-300"><div class="card-content"><h3 class="text-xl font-bold text-white mb-2">Pattern-Proof Preparation</h3><p class="text-gray-400">Our mentors specialize in integrative problems (e.g., Mechanics + Thermo) to make you resilient against any new pattern or surprise JEE throws at you.</p></div></div>
+                <div class="card p-6 rounded-xl transform hover:scale-105 transition-transform duration-300"><div class="card-content"><h3 class="text-xl font-bold text-white mb-2">Mentor-Verified Routes</h3><p class="text-gray-400">Top mentors solve each test under timed conditions to refine pacing and logic flow, simulating real exam pressure perfectly.</p></div></div>
+                <div class="card p-6 rounded-xl transform hover:scale-105 transition-transform duration-300"><div class="card-content"><h3 class="text-xl font-bold text-white mb-2">Transformation, Not Just Testing</h3><p class="text-gray-400">This is a learning accelerator. With live sessions to improve test temperament and 200+ hours of concept strengthening, we turn errors into expertise.</p></div></div>
+                <div class="card p-6 rounded-xl transform hover:scale-105 transition-transform duration-300"><div class="card-content"><h3 class="text-xl font-bold text-white mb-2">360° Error Analysis</h3><p class="text-gray-400">Our personalized SWOT feedback and topic-wise stress testing pinpoint exactly where you lose marks, fixing conceptual gaps and silly mistakes.</p></div></div>
+                <div class="card p-6 rounded-xl transform hover:scale-105 transition-transform duration-300"><div class="card-content"><h3 class="text-xl font-bold text-white mb-2">Rank Range Targeting</h3><p class="text-gray-400">We build tests not just by chapters, but by target ranks. Specific questions are designed to push you into the Top 5000, Top 1000, or even the Top 10.</p></div></div>
+            </div>
+        </div>
+    </section>
 
-        <section class="bg-white rounded-lg shadow-xl p-8 md:p-12 mb-20 animate-on-scroll">
-            <h2 class="text-3xl font-bold text-center mb-12"><span class="invictus-indigo">The Four Pillars</span> of the INVICTUS Advantage</h2>
-             <p class="text-lg text-center max-w-3xl mx-auto mb-12">The INVICTUS Test Series is not just more tests. It is a different, more intense class of preparation designed to forge foundational strength into a winning weapon. Click on each card to learn more.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <div class="feature-card h-64 cursor-pointer">
-                    <div class="feature-card-inner">
-                        <div class="feature-card-front bg-gray-100 shadow-md">
-                            <span class="text-5xl mb-4">👥</span>
-                            <h3 class="text-xl font-bold">Forged by Legends</h3>
+    <!-- Open Test Section -->
+    <section id="open-test" class="py-20 px-4 bg-black">
+        <div class="container mx-auto">
+            <div class="card rounded-xl p-8 md:p-12 lg:p-16 border-2 border-amber-400 shadow-2xl shadow-amber-500/10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Experience the INVICTUS Edge. <span class="gradient-text">For Free.</span></h2>
+                <p class="mt-4 text-gray-300 max-w-3xl mx-auto">Don't just take our word for it. Taste the challenge, the quality, and the analytical depth for yourself. All serious aspirants are invited to the All-India INVICTUS Open Test.</p>
+                <div class="mt-8">
+                    <p class="text-lg text-gray-400">Open Test Date:</p>
+                    <p class="text-3xl font-bold gradient-text mt-1">Sunday, 20th July</p>
+                </div>
+                <a href="#" class="mt-10 inline-block btn-premium text-gray-900 font-bold py-4 px-10 rounded-lg text-xl uppercase">
+                    Register for the Free Test
+                </a>
+                <p class="mt-4 text-sm text-gray-500">Limited slots available. Secure your spot now.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial/Quote Section -->
+    <section class="py-20 px-4 bg-black">
+        <div class="container mx-auto text-center max-w-4xl">
+            <p class="text-2xl md:text-3xl font-semibold text-white italic">"Every single mark can change your college and your branch. We built INVICTUS because on result day, there are no second chances."</p>
+            <p class="mt-6 text-xl font-bold gradient-text">- The AAKASH Expert Mentor Team</p>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white">Choose Your Path to Success</h2>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">Select your class to view the tailored packages designed for your success. Prices shown are exclusive for existing Aakash students.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex justify-center space-x-2 md:space-x-4 mb-10">
+                <button class="pricing-tab active" onclick="showTab('class-xi')">Class XI</button>
+                <button class="pricing-tab" onclick="showTab('class-xii')">Class XII</button>
+                <button class="pricing-tab" onclick="showTab('class-xiip')">XII Pass</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="pricing-content">
+                <!-- Class XI -->
+                <div id="class-xi" class="pricing-tab-content">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="pricing-card rounded-xl p-8 flex flex-col">
+                            <h3 class="text-2xl font-bold gradient-text mb-2">Test Series Only</h3>
+                            <p class="text-gray-400 mb-6 flex-grow">The core INVICTUS experience. Perfect for targeted practice.</p>
+                            <p class="text-sm text-gray-300">TY Invictus Test Series for XI</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-bold text-white">₹12,999</span>
+                                <span class="text-lg text-gray-500 line-through">₹15,499</span>
+                            </div>
+                            <a href="#" class="w-full text-center btn-premium text-gray-900 font-bold py-3 px-6 rounded-lg uppercase">Enroll Now</a>
                         </div>
-                        <div class="feature-card-back">
-                            <h3 class="text-xl font-bold mb-2">Forged by Legends</h3>
-                            <p class="text-sm">Driven by seasoned JEE (Advanced) mentors who have consistently produced top-500 AIRs. Their experience is your child's advantage.</p>
+                        <div class="pricing-card rounded-xl p-8 flex flex-col">
+                            <h3 class="text-2xl font-bold gradient-text mb-2">Test Series + CBT</h3>
+                            <p class="text-gray-400 mb-6 flex-grow">The complete online practice tool. Combine the test series with Computer Based Test simulation.</p>
+                             <p class="text-sm text-gray-300">Test Series + CBT Add-on</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-bold text-white">₹16,999</span>
+                                <span class="text-lg text-gray-500 line-through">₹19,499</span>
+                            </div>
+                            <a href="#" class="w-full text-center btn-premium text-gray-900 font-bold py-3 px-6 rounded-lg uppercase">Enroll Now</a>
+                        </div>
+                        <div class="pricing-card rounded-xl p-8 flex flex-col border-2 border-amber-400 shadow-2xl shadow-amber-500/20">
+                            <span class="text-center mb-4 font-bold text-amber-400 bg-amber-400/10 rounded-full py-1 px-4 self-center">Recommended</span>
+                            <h3 class="text-2xl font-bold gradient-text mb-2">Complete Package</h3>
+                            <p class="text-gray-400 mb-6 flex-grow">The ultimate arsenal. Get the Test Series plus expertly crafted Books for comprehensive preparation.</p>
+                            <p class="text-sm text-gray-300">TY Complete Package w/ Books</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-bold text-white">₹17,999</span>
+                                <span class="text-lg text-gray-500 line-through">₹21,999</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mb-4">CBT can be added separately for ₹4000.</p>
+                            <a href="#" class="w-full text-center btn-premium text-gray-900 font-bold py-3 px-6 rounded-lg uppercase">Enroll Now</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="feature-card h-64 cursor-pointer">
-                    <div class="feature-card-inner">
-                        <div class="feature-card-front bg-gray-100 shadow-md">
-                            <span class="text-5xl mb-4">🧠</span>
-                            <h3 class="text-xl font-bold">'Above Advanced' Philosophy</h3>
+                <!-- Class XII -->
+                <div id="class-xii" class="pricing-tab-content hidden">
+                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="pricing-card rounded-xl p-8 flex flex-col">
+                            <h3 class="text-2xl font-bold gradient-text mb-2">Test Series Only</h3>
+                            <p class="text-gray-400 mb-6 flex-grow">The core INVICTUS experience for Class XII.</p>
+                            <p class="text-sm text-gray-300">OY Invictus Test Series for XIIS</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-bold text-white">₹8,999</span>
+                                <span class="text-lg text-gray-500 line-through">₹11,499</span>
+                            </div>
+                            <a href="#" class="w-full text-center btn-premium text-gray-900 font-bold py-3 px-6 rounded-lg uppercase">Enroll Now</a>
                         </div>
-                        <div class="feature-card-back">
-                            <h3 class="text-xl font-bold mb-2">'Above Advanced' Philosophy</h3>
-                            <p class="text-sm">Questions are intentionally designed to be a level above the expected JEE Advanced difficulty to stretch your child's thinking and build unshakeable confidence.</p>
+                        <div class="pricing-card rounded-xl p-8 flex flex-col">
+                            <h3 class="text-2xl font-bold gradient-text mb-2">Test Series + CBT</h3>
+                            <p class="text-gray-400 mb-6 flex-grow">The complete online practice tool. Combine the test series with Computer Based Test simulation.</p>
+                            <p class="text-sm text-gray-300">Test Series + CBT Add-on</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-bold text-white">₹11,499</span>
+                                <span class="text-lg text-gray-500 line-through">₹13,999</span>
+                            </div>
+                            <a href="#" class="w-full text-center btn-premium text-gray-900 font-bold py-3 px-6 rounded-lg uppercase">Enroll Now</a>
+                        </div>
+                        <div class="pricing-card rounded-xl p-8 flex flex-col border-2 border-amber-400 shadow-2xl shadow-amber-500/20">
+                            <span class="text-center mb-4 font-bold text-amber-400 bg-amber-400/10 rounded-full py-1 px-4 self-center">Recommended</span>
+                            <h3 class="text-2xl font-bold gradient-text mb-2">Complete Package</h3>
+                            <p class="text-gray-400 mb-6 flex-grow">The ultimate arsenal. Get the Test Series plus expertly crafted Books.</p>
+                            <p class="text-sm text-gray-300">XIIS Complete Package w/ Books</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-bold text-white">₹14,499</span>
+                                <span class="text-lg text-gray-500 line-through">₹17,999</span>
+                            </div>
+                             <p class="text-xs text-gray-500 mb-4">CBT can be added separately for ₹2500.</p>
+                            <a href="#" class="w-full text-center btn-premium text-gray-900 font-bold py-3 px-6 rounded-lg uppercase">Enroll Now</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="feature-card h-64 cursor-pointer">
-                    <div class="feature-card-inner">
-                        <div class="feature-card-front bg-gray-100 shadow-md">
-                            <span class="text-5xl mb-4">⏱️</span>
-                            <h3 class="text-xl font-bold">A True JEE Simulation</h3>
+                <!-- Class XII Pass -->
+                <div id="class-xiip" class="pricing-tab-content hidden">
+                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="pricing-card rounded-xl p-8 flex flex-col">
+                            <h3 class="text-2xl font-bold gradient-text mb-2">Test Series Only</h3>
+                            <p class="text-gray-400 mb-6 flex-grow">The core INVICTUS experience for XII Pass students.</p>
+                            <p class="text-sm text-gray-300">OY Invictus Test Series for XIIP</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-bold text-white">₹8,999</span>
+                                <span class="text-lg text-gray-500 line-through">₹11,499</span>
+                            </div>
+                            <a href="#" class="w-full text-center btn-premium text-gray-900 font-bold py-3 px-6 rounded-lg uppercase">Enroll Now</a>
                         </div>
-                        <div class="feature-card-back">
-                             <h3 class="text-xl font-bold mb-2">A True JEE Simulation</h3>
-                            <p class="text-sm">We meticulously design time traps, conceptual twists, and integrative problems that force students to think laterally under real exam pressure.</p>
+                        <div class="pricing-card rounded-xl p-8 flex flex-col">
+                            <h3 class="text-2xl font-bold gradient-text mb-2">Test Series + CBT</h3>
+                            <p class="text-gray-400 mb-6 flex-grow">The complete online practice tool. Combine the test series with Computer Based Test simulation.</p>
+                            <p class="text-sm text-gray-300">Test Series + CBT Add-on</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-bold text-white">₹11,499</span>
+                                <span class="text-lg text-gray-500 line-through">₹13,999</span>
+                            </div>
+                            <a href="#" class="w-full text-center btn-premium text-gray-900 font-bold py-3 px-6 rounded-lg uppercase">Enroll Now</a>
                         </div>
-                    </div>
-                </div>
-
-                <div class="feature-card h-64 cursor-pointer">
-                    <div class="feature-card-inner">
-                        <div class="feature-card-front bg-gray-100 shadow-md">
-                             <span class="text-5xl mb-4">🔎</span>
-                            <h3 class="text-xl font-bold">From Analysis to Mastery</h3>
-                        </div>
-                        <div class="feature-card-back">
-                             <h3 class="text-xl font-bold mb-2">From Analysis to Mastery</h3>
-                            <p class="text-sm">A complete feedback loop with personalized SWOT analysis, 200+ hours of concept strengthening, and live test analysis with JEE experts.</p>
+                        <div class="pricing-card rounded-xl p-8 flex flex-col border-2 border-amber-400 shadow-2xl shadow-amber-500/20">
+                            <span class="text-center mb-4 font-bold text-amber-400 bg-amber-400/10 rounded-full py-1 px-4 self-center">Recommended</span>
+                            <h3 class="text-2xl font-bold gradient-text mb-2">Complete Package</h3>
+                            <p class="text-gray-400 mb-6 flex-grow">The ultimate arsenal. Get the Test Series plus expertly crafted Books.</p>
+                            <p class="text-sm text-gray-300">XIIP Complete Package w/ Books</p>
+                            <div class="my-6">
+                                <span class="text-4xl font-bold text-white">₹14,499</span>
+                                <span class="text-lg text-gray-500 line-through">₹17,999</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mb-4">CBT can be added separately for ₹2500.</p>
+                            <a href="#" class="w-full text-center btn-premium text-gray-900 font-bold py-3 px-6 rounded-lg uppercase">Enroll Now</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <section class="text-center mb-20 animate-on-scroll">
-            <h2 class="text-3xl font-bold mb-2">The Aakash Preparation Pyramid</h2>
-            <p class="text-lg max-w-3xl mx-auto mb-12">Our two-tiered approach ensures comprehensive preparation. The foundational tests build strength, while INVICTUS provides the winning edge.</p>
-            <div class="w-full max-w-lg mx-auto flex flex-col items-center">
-                <div class="w-full h-24 bg-invictus-amber flex items-center justify-center text-center text-white font-bold p-2 pyramid-layer animate-on-scroll">INVICTUS Test Series<br>(The Winning Edge)</div>
-                <div class="w-10/12 h-20 bg-invictus-indigo opacity-80 flex items-center justify-center text-center text-white font-semibold p-2 pyramid-layer animate-on-scroll" style="transition-delay: 0.1s;">National Benchmarking (AIATS)</div>
-                <div class="w-11/12 h-20 bg-invictus-indigo opacity-60 flex items-center justify-center text-center text-white font-semibold p-2 pyramid-layer animate-on-scroll" style="transition-delay: 0.2s;">Foundational Tests (UTs & TEs)</div>
-                <div class="w-full h-20 bg-invictus-indigo opacity-40 flex items-center justify-center text-center text-white font-semibold p-2 pyramid-layer animate-on-scroll" style="transition-delay: 0.3s;">Classroom Learning</div>
-            </div>
-        </section>
+             <p class="text-center mt-8 text-sm text-gray-500">*Fee is tax excluding.</p>
+        </div>
+    </section>
 
-        <section class="text-center animate-on-scroll">
-            <h2 class="text-3xl font-bold text-center mb-4">An Exclusive Invitation</h2>
-            <p class="text-lg max-w-3xl mx-auto mb-8">As part of the Aakash family, your child has exclusive access to the INVICTUS Test Series at a special, highly-discounted price. This is our investment in their potential.</p>
-            <a href="#" class="inline-block bg-invictus-amber text-invictus-indigo font-bold text-lg py-4 px-10 rounded-lg shadow-lg hover:bg-amber-400 transition-colors">Enroll Now & Secure the Winning Edge</a>
-        </section>
-
-    </main>
-
-    <footer class="bg-invictus-indigo text-white text-center py-6 mt-16">
-        <p>&copy; 2025 Aakash Educational Services Limited. All Rights Reserved.</p>
-        <p class="text-sm text-gray-400">The INVICTUS Test Series - From Prepared to Formidable.</p>
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-500">
+        <p>&copy; 2025 AAKASH Educational Services Limited. All Rights Reserved.</p>
+        <p class="text-sm mt-2">Compete Here. Conquer There.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('marksLostChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Marks Scored', 'Marks Lost to Errors'],
-                    datasets: [{
-                        data: [335, 25],
-                        backgroundColor: [
-                            '#1A237E', 
-                            '#FFAB00'  
-                        ],
-                        borderColor: [
-                            '#FFFFFF',
-                            '#FFFFFF'
-                        ],
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '70%',
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            enabled: true,
-                            callbacks: {
-                                title: function(tooltipItems) {
-                                    const item = tooltipItems[0];
-                                    let label = item.chart.data.labels[item.dataIndex];
-                                    if (Array.isArray(label)) {
-                                      return label.join(' ');
-                                    } else {
-                                      return label;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+        function showTab(tabId) {
+            // Hide all tab content
+            const contents = document.querySelectorAll('.pricing-tab-content');
+            contents.forEach(content => {
+                content.classList.add('hidden');
             });
 
-            const scrollElements = document.querySelectorAll(".animate-on-scroll");
-
-            const elementInView = (el, dividend = 1) => {
-                const elementTop = el.getBoundingClientRect().top;
-                return (
-                    elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
-                );
-            };
-
-            const displayScrollElement = (element) => {
-                element.classList.add("is-visible");
-            };
-
-            const hideScrollElement = (element) => {
-                element.classList.remove("is-visible");
-            };
-
-            const handleScrollAnimation = () => {
-                scrollElements.forEach((el) => {
-                    if (elementInView(el, 1.25)) {
-                        displayScrollElement(el);
-                    } else {
-                        hideScrollElement(el);
-                    }
-                });
-            };
-
-            window.addEventListener("scroll", () => {
-                handleScrollAnimation();
-            });
-            handleScrollAnimation();
-            
-            const featureCards = document.querySelectorAll('.feature-card');
-            featureCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    card.classList.toggle('is-flipped');
-                });
+            // Deactivate all tabs
+            const tabs = document.querySelectorAll('.pricing-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
             });
 
-        });
+            // Show the selected tab content
+            document.getElementById(tabId).classList.remove('hidden');
+
+            // Activate the selected tab
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
     </script>
+
 </body>
 </html>
